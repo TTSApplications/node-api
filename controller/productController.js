@@ -49,7 +49,7 @@ module.exports.getProductById = async (req, res) => {
 
         const responseFromService = await productService.getProductById(req.params);
         response.status = 200;
-        response.message = constants.productMessage.PRODUCT_CREATED;
+        response.message = constants.productMessage.PRODUCT_FETCHED;
         response.body = responseFromService;
 
     }catch (error){

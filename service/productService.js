@@ -1,7 +1,8 @@
 //Purpose of this service is to input data into the database
 
 const Product = require('../database/models/productModel');
-const {formatMongoData} = require('..//helper/dbHelper');
+const {formatMongoData, checkObjectID} = require('..//helper/dbHelper');
+const constants = require('../constants');
 
 module.exports.createProduct = async (serviceData) => {
 
@@ -36,7 +37,14 @@ module.exports.getProductById = async ({ id }) => { //default values
 
     try{
 
+        checkObjectID(id);
+
         let product = await Product.findById(id);
+
+        if (!product){
+            throw new Error(constants.productMessage.PRODUCT_NOT_FOUND);
+        }
+
         return formatMongoData(product);
 
     }catch (error){
