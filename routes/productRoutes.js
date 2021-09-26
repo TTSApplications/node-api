@@ -11,7 +11,13 @@ router.post('/', // /api/v1/product'[whatever is in this string param'
 );
     
 router.get('/:id', 
-    productController.getProductById)
+    productController.getProductById
+)
+
+router.put('/:id',
+    joiSchemaValidation.validateBody(productSchema.updateProductSchema),
+    productController.updateProduct
+)
 
 router.get('/', 
     joiSchemaValidation.validateQueryParams(productSchema.getAllProductSchema),
