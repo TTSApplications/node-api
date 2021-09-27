@@ -12,6 +12,11 @@ module.exports = {
         PRODUCT_NOT_FOUND: 'Product Not Found'
     },
 
+    userMessage: {
+        SIGNUP_SUCCESS: 'Signup Successful',
+        DUPLICATE_EMAIL: 'User already exist with given email'
+    },
+
     requestValidationMessage: {
         BAD_REQUEST: 'Invalid fields'
     },
