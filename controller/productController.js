@@ -83,3 +83,23 @@ module.exports.updateProduct = async (req, res) => {
     return res.status(response.status).send(response);
 
 }
+
+module.exports.deleteProduct = async (req, res) => {
+
+    let response = {...constants.defaultServerResponse}; //Saves us from writing server responses for each controller
+
+    try{
+
+        const responseFromService = await productService.deleteProduct(req.params);
+        response.status = 200;
+        response.message = constants.productMessage.PRODUCT_DELETED;
+        response.body = responseFromService;
+
+    }catch (error){
+        console.log('Something went wrong: Controller: deleteProduct', error);
+        response.message = error.message;
+    }
+
+    return res.status(response.status).send(response);
+
+}

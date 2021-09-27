@@ -78,3 +78,24 @@ module.exports.updateProduct = async ({ id, updateInfo }) => { //default values
     }
 
 }
+
+module.exports.deleteProduct = async ({ id }) => { //default values
+
+    try{
+
+        checkObjectID(id);
+
+        let product = await Product.findByIdAndDelete(id);
+
+        if (!product){
+            throw new Error(constants.productMessage.PRODUCT_NOT_FOUND);
+        }
+
+        return formatMongoData(product);
+
+    }catch (error){
+        console.log('Something went wrong: Service: deleteProduct', error);
+        throw new Error(error);
+    }
+
+}
