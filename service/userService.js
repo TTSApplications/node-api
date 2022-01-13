@@ -7,7 +7,7 @@ module.exports.signup = async ({ email, password }) => {
 
     try{
 
-         //If your key an value are the same (ex. "email: email") you don't have to define both and just use one (ex. "email")
+         //If your key and value are the same (ex. "email: email") you don't have to define both and just use one (ex. "email")
         const user = await User.findOne({ email });
 
         if (user) {
