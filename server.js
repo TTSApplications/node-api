@@ -1,6 +1,9 @@
 const express = require('express');
 const dotEnv = require('dotenv');
 const cors = require('cors');
+const swaggerUI = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./swagger.yaml');
 const dbConnection = require('./database/connection');
 
 dotEnv.config();
@@ -30,6 +33,11 @@ app.use(express.urlencoded({extended: true})); //helps in parsing form url encod
 //Create the route
 app.use('/api/v1/product', require('./routes/productRoutes'));
 app.use('/api/v1/user', require('./routes/userRoutes'));
+
+// API Documentation
+if(process.env.NODE_ENV != 'production'){ //Show this document only when the environment is not in production
+    app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+}
 
 app.get('/', (req, res, next) => {
     res.send('Hello from Node API Server');
